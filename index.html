@@ -274,10 +274,6 @@ function getCurrentStatus() {
         return "⚠️ Misschien, we zijn waarschijnlijk op uitstap";
     }
 
-    // Vrije tekst
-    if(tripData.statusMode === "⚪ Vrije tekst"){
-        return tripData.customStatus;
-    }
 
     // Handmatige keuzes
     switch(tripData.statusMode){
@@ -302,20 +298,7 @@ function render(){
  document.getElementById("location").innerText =
  tripData.location;
 
- let currentStatus;
 
-if(tripData.statusMode === "AUTO")
-{
-    currentStatus = getAutomaticStatus();
-}
-else if(tripData.statusMode === "⚪ Vrije tekst")
-{
-    currentStatus = tripData.customStatus;
-}
-else
-{
-    currentStatus = tripData.statusMode;
-}
 
 document.getElementById("status").innerText =
 getCurrentStatus();
