@@ -202,9 +202,10 @@ function getCurrentStatus() {
     }
 
     // Vrije tekst
-    if(tripData.statusMode === "⚪ Vrije tekst"){
-        return tripData.customStatus;
-    }
+if(tripData.statusMode === "CUSTOM")
+{
+    return tripData.customStatus;
+}
 
     // Handmatige keuzes
     switch(tripData.statusMode){
@@ -385,7 +386,7 @@ document.getElementById("statusInput")
 .addEventListener("change", function(){
 
     document.getElementById("customStatusInput").style.display =
-        this.value === "⚪ Vrije tekst"
+        this.value === "CUSTOM"
         ? "block"
         : "none";
 
