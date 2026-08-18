@@ -377,24 +377,26 @@ function updateClock(){
  document.getElementById("belgiumTime").innerText =
  belgium;
 
- const hour =
- parseInt(
- new Date().toLocaleString(
- "en-US",
- {
-  timeZone:tripData.timezone,
-  hour:"numeric",
-  hour12:false
- }).split(",")[1]
- );
+const hour = Number(
+    new Date().toLocaleString(
+        "en-US",
+        {
+            timeZone: tripData.timezone,
+            hour: "numeric",
+            hour12: false
+        }
+    )
+);
 
- document.getElementById("daynight").innerHTML =
- (hour>=6 && hour<20)
- ?
- "☀️ Het is dag bij mama & papa"
- :
- "🌙 Mama & papa slapen waarschijnlijk";
+if(hour >= 23 || hour < 7){
 
+    document.getElementById("daynight").innerHTML =
+    "🌙 Mama & papa slapen";
+}
+else{
+
+    document.getElementById("daynight").innerHTML =
+    "☀️ Mama & papa zijn wakker";
 }
 
 
