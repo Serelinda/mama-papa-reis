@@ -182,14 +182,16 @@ function setAutomaticLocation() {
 
     const day = today.getDate();
     const month = today.getMonth() + 1;
+    const year = today.getFullYear();
 
-if(month !== 9){
+if(year !== 2026 || month !== 9){
 
-tripData.location = "🏠 Thuis in België";
-tripData.timezone = "Europe/Brussels";
+    tripData.location = "🏠 Thuis in België";
+    tripData.timezone = "Europe/Brussels";
 
-return;
+    return;
 }
+
 
     // Colorado
     if(day >= 2 && day <= 3){
@@ -333,16 +335,6 @@ let tripData =
 JSON.parse(localStorage.getItem("tripData"))
 || defaultData;
 
-function updateLocationFromDropdown(){
-
-    const value =
-        document.getElementById("locationSelect").value;
-
-    const parts = value.split("|");
-
-    tripData.location = parts[0];
-    tripData.timezone = parts[1];
-}
     
 function toggleCustomStatusField(){
 
@@ -361,25 +353,19 @@ document
 
 function render(){
 
- document.getElementById("location").innerText =
- tripData.location;
-
-
-
-document.getElementById("status").innerText =
-getCurrentStatus();
-
- document.getElementById("message").innerText =
- tripData.message;
-
- document.getElementById("polarstepsBtn").href =
- tripData.polarsteps;
-
     setAutomaticLocation();
 
-document.getElementById("location").innerText =
-tripData.location;
-    
+    document.getElementById("location").innerText =
+    tripData.location;
+
+    document.getElementById("status").innerText =
+    getCurrentStatus();
+
+    document.getElementById("message").innerText =
+    tripData.message;
+
+    document.getElementById("polarstepsBtn").href =
+    tripData.polarsteps;
 }
 
 function updateClock(){
@@ -439,12 +425,6 @@ function toggleAdmin(){
  ? "none"
  : "block";
 
- document.getElementById("locationInput").value =
- tripData.location;
-
- document.getElementById("timezoneInput").value =
- tripData.timezone;
-
 document.getElementById("statusInput").value =
 tripData.statusMode || "AUTO";
 
@@ -467,38 +447,8 @@ tripData.message;
 toggleCustomStatusField();
 }
 
-function getAutomaticStatus(){
-
-    const hour =
-    Number(
-        new Date().toLocaleString(
-            "en-US",
-            {
-                timeZone: tripData.timezone,
-                hour: "numeric",
-                hour12:false
-            }
-        )
-    );
-
-    if(hour < 7)
-        return "🔴 Mama & papa slapen";
-
-    if(hour < 9)
-        return "☕ Mama & papa zijn net wakker";
-
-    if(hour < 18)
-        return "🟢 Mama & papa zijn waarschijnlijk bereikbaar";
-
-    if(hour < 22)
-        return "🟡 Mama & papa zijn waarschijnlijk op uitstap";
-
-    return "🔴 Mama & papa slapen";
-}
-    
+   
 function saveData(){
-
-updateLocationFromDropdown();
 
 tripData.statusMode =
 document.getElementById("statusInput").value;
