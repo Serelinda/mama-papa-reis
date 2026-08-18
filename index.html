@@ -182,10 +182,11 @@ function getCurrentStatus() {
         )
     );
 
-if(tripData.statusMode === "CUSTOM"){
-    return tripData.customStatus;
-}
-    
+    // Eigen bericht heeft absolute voorrang
+    if(tripData.statusMode === "CUSTOM"){
+        return tripData.customStatus;
+    }
+
     // Automatisch slapen
     if(hour >= 23 || hour < 7){
         return "😴 Nee, wij slapen nu";
@@ -205,13 +206,6 @@ if(tripData.statusMode === "CUSTOM"){
         return "⚠️ Misschien, we zijn waarschijnlijk op uitstap";
     }
 
-    // Vrije tekst
-if(tripData.statusMode === "CUSTOM")
-{
-    return tripData.customStatus;
-}
-
-    // Handmatige keuzes
     switch(tripData.statusMode){
 
         case "BELLEN":
@@ -226,7 +220,7 @@ if(tripData.statusMode === "CUSTOM")
         default:
             return "✅ Ja, waarschijnlijk wel";
     }
-}    
+}
     
 let tripData =
 JSON.parse(localStorage.getItem("tripData"))
