@@ -242,57 +242,7 @@ document
 .addEventListener("change", toggleCustomStatusField);
 
     
-function getCurrentStatus() {
 
-    const hour = parseInt(
-        new Date().toLocaleString(
-            "en-US",
-            {
-                timeZone: tripData.timezone,
-                hour: "numeric",
-                hour12: false
-            }
-        )
-    );
-
-    // Automatisch slapen
-    if(hour >= 23 || hour < 7){
-        return "😴 Nee, wij slapen nu";
-    }
-
-    // Automatische modus
-    if(tripData.statusMode === "AUTO"){
-
-        if(hour < 9){
-            return "☕ We zijn net wakker";
-        }
-
-        if(hour < 18){
-            return "✅ Ja, waarschijnlijk wel";
-        }
-
-        return "⚠️ Misschien, we zijn waarschijnlijk op uitstap";
-    }
-
-
-    // Handmatige keuzes
-    switch(tripData.statusMode){
-
-        case "BELLEN":
-            return "✅ Ja, jullie mogen ons gerust bellen";
-
-        case "ONDERWEG":
-            return "⚠️ Misschien, we zijn onderweg";
-
-        case "SLAPEN":
-            return "😴 Nee, wij slapen nu";
-
-        default:
-            return "✅ Ja, waarschijnlijk wel";
-    }
-}
-
-    
 function render(){
 
  document.getElementById("location").innerText =
