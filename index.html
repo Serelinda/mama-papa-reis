@@ -120,6 +120,7 @@ button{
 <br><br>
 
 <a class="polarsteps"
+   id="familyChatBtn"
    href="https://chat.google.com/app/chat/AAQAQa5aWZs"
    target="_blank"
    style="background:#4285F4;">
@@ -451,7 +452,20 @@ document.getElementById("customStatusInput").value;
 
 render();
 updateClock();
+function hideChatButtonOnMobile() {
 
+    const isMobile =
+        /Android|iPhone|iPad|iPod|Mobile/i.test(
+            navigator.userAgent
+        );
+
+    if(isMobile){
+        document.getElementById("familyChatBtn").style.display = "none";
+    }
+}
+
+hideChatButtonOnMobile();
+    
 setInterval(() => {
     updateClock();
     document.getElementById("status").innerText =
