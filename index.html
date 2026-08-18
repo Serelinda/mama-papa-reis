@@ -131,7 +131,20 @@ button{
 <input id="timezoneInput">
 
 <label>Status</label>
-<input id="statusInput">
+
+<select id="statusInput">
+    <option value="AUTO">Automatisch bepalen</option>
+    <option value="🟢 Bereikbaar">🟢 Bereikbaar</option>
+    <option value="🟡 Onderweg">🟡 Onderweg</option>
+    <option value="🔴 Slapen">🔴 Slapen</option>
+    <option value="⚪ Vrije tekst">⚪ Vrije tekst</option>
+</select>
+
+<input
+    id="customStatusInput"
+    placeholder="Eigen status"
+    style="display:none;"
+>
 
 <label>Bericht</label>
 <textarea id="messageInput"></textarea>
