@@ -129,41 +129,6 @@ button{
     
 <br><br>
 
-<button onclick="toggleAdmin()">⚙️ Instellingen voor mama & papa</button>
-
-<div class="admin" id="adminPanel">
-
-    <h2>Instellingen</h2>
-
-<br><br>
-    
-    <label>Bereikbaarheid</label>
-
-    <select id="statusInput">
-        <option value="AUTO">Automatisch bepalen</option>
-        <option value="BELLEN">✅ Bereikbaar</option>
-        <option value="ONDERWEG">⚠️ Onderweg</option>
-        <option value="SLAPEN">😴 Slapen</option>
-        <option value="CUSTOM">✏️ Eigen bericht</option>
-    </select>
-    
-    <br><br>
-    
-    <input
-        id="customStatusInput"
-        placeholder="Eigen boodschap"
-        style="display:none;"
-    >
-
-    <label>Bericht van vandaag</label>
-    <textarea id="messageInput" rows="4"></textarea>
-
-    <button class="saveBtn" onclick="saveData()">
-        Opslaan
-    </button>
-
-</div>
-
 </div>
 
 <script>
@@ -335,6 +300,36 @@ let tripData =
 JSON.parse(localStorage.getItem("tripData"))
 || defaultData;
 
+async function loadTripData() {
+
+    try {
+
+        const response =
+            await fetch("tripdata.json");
+
+        const data =
+            await response.json();
+
+        tripData.statusMode =
+            data.statusMode || "AUTO";
+
+        tripData.customStatus =
+            data.customStatus || "";
+
+        tripData.message =
+            data.message || "";
+
+        render();
+
+    }
+    catch(error){
+
+        console.error(
+            "tripdata.json niet gevonden",
+            error
+        );
+    }
+}    
     
 function toggleCustomStatusField(){
 
@@ -470,7 +465,7 @@ document.getElementById("customStatusInput").value;
  alert("Opgeslagen!");
 }
 
-render();
+loadTripData();
 updateClock();
 function hideChatButtonOnMobile() {
 
