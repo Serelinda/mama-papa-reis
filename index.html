@@ -331,20 +331,7 @@ async function loadTripData() {
     }
 }    
     
-function toggleCustomStatusField(){
-
-    const show =
-    document.getElementById("statusInput").value === "CUSTOM";
-
-    document.getElementById("customStatusInput").style.display =
-    show ? "block" : "none";
-}
-
-document
-.getElementById("statusInput")
-.addEventListener("change", toggleCustomStatusField);
-
-    
+   
 
 function render(){
 
@@ -410,60 +397,7 @@ function updateClock(){
 
 }
 
-function toggleAdmin(){
 
- const panel =
- document.getElementById("adminPanel");
-
- panel.style.display =
- panel.style.display==="block"
- ? "none"
- : "block";
-
-document.getElementById("statusInput").value =
-tripData.statusMode || "AUTO";
-
-document.getElementById("customStatusInput").value =
-tripData.customStatus || "";
-
-document.getElementById("statusInput")
-.addEventListener("change", function(){
-
-    document.getElementById("customStatusInput").style.display =
-        this.value === "CUSTOM"
-        ? "block"
-        : "none";
-
-});
-    
-document.getElementById("messageInput").value =
-tripData.message;
-
-toggleCustomStatusField();
-}
-
-   
-function saveData(){
-
-tripData.statusMode =
-document.getElementById("statusInput").value;
-
-tripData.customStatus =
-document.getElementById("customStatusInput").value;
-
-
- tripData.message =
- document.getElementById("messageInput").value;
-
- localStorage.setItem(
- "tripData",
- JSON.stringify(tripData)
- );
-
- render();
-
- alert("Opgeslagen!");
-}
 
 loadTripData();
 updateClock();
