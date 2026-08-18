@@ -101,6 +101,7 @@ button{
 <div class="box" id="daynight"></div>
 
 <div class="box">
+<div class="box">
 <h3>📞 Kunnen jullie ons bellen?</h3>
 <div id="status"></div>
 </div>
@@ -279,6 +280,20 @@ function render(){
  document.getElementById("location").innerText =
  tripData.location;
 
+ let currentStatus;
+
+if(tripData.statusMode === "AUTO")
+{
+    currentStatus = getAutomaticStatus();
+}
+else if(tripData.statusMode === "⚪ Vrije tekst")
+{
+    currentStatus = tripData.customStatus;
+}
+else
+{
+    currentStatus = tripData.statusMode;
+}
 
 document.getElementById("status").innerText =
 getCurrentStatus();
