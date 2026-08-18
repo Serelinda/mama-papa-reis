@@ -2,25 +2,31 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Mama & Papa op Reis</title>
+<title>Mama & Papa op huwelijksreis</title>
 
 <style>
+
 body{
     font-family: Arial, sans-serif;
     background:#f5f7fa;
-    text-align:center;
-    padding:30px;
+    margin:0;
+    padding:20px;
 }
 
 .card{
-    max-width:600px;
+    max-width:700px;
     margin:auto;
     background:white;
     padding:30px;
     border-radius:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    box-shadow:0 4px 20px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+h1{
+    color:#004a99;
 }
 
 .time{
@@ -31,13 +37,46 @@ body{
 
 .location{
     font-size:28px;
-    margin-bottom:20px;
+    margin-bottom:15px;
 }
 
-.status{
-    font-size:24px;
-    margin-top:20px;
+.box{
+    margin:15px 0;
+    padding:15px;
+    background:#f0f4f8;
+    border-radius:12px;
 }
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.admin{
+    display:none;
+    margin-top:20px;
+    text-align:left;
+}
+
+.admin input,
+.admin textarea{
+    width:100%;
+    padding:8px;
+    margin-bottom:10px;
+}
+
+.polarsteps{
+    display:inline-block;
+    margin-top:15px;
+    background:#2aa745;
+    color:white;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:10px;
+}
+
 </style>
 </head>
 
@@ -45,48 +84,190 @@ body{
 
 <div class="card">
 
-<h1>🌍 Mama & Papa op Reis</h1>
+<h1>💍 Mama & Papa op Huwelijksreis</h1>
 
-<div class="location" id="location">
-Maui, Hawaii
+<div class="location" id="location"></div>
+
+<div class="box">
+<h3>🕒 Bij mama & papa</h3>
+<div class="time" id="localTime"></div>
 </div>
 
-<div class="time" id="time">
-...
+<div class="box">
+<h3>🇧🇪 In België</h3>
+<div class="time" id="belgiumTime"></div>
 </div>
 
-<div id="difference"></div>
+<div class="box" id="daynight"></div>
 
-<div class="status">
-🌞 Wij zijn waarschijnlijk wakker
+<div class="box">
+<h3>Status</h3>
+<div id="status"></div>
+</div>
+
+<div class="box">
+<h3>💬 Bericht van vandaag</h3>
+<div id="message"></div>
+</div>
+
+<a class="polarsteps"
+   id="polarstepsBtn"
+   target="_blank">
+📸 Volg onze reis op Polarsteps
+</a>
+
+<br><br>
+
+<button onclick="toggleAdmin()">⚙️ Ouders</button>
+
+<div class="admin" id="adminPanel">
+
+<h3>Instellingen</h3>
+
+<label>Locatie</label>
+<input id="locationInput">
+
+<label>Tijdzone</label>
+<input id="timezoneInput">
+
+<label>Status</label>
+<input id="statusInput">
+
+<label>Bericht</label>
+<textarea id="messageInput"></textarea>
+
+<button onclick="saveData()">Opslaan</button>
+
 </div>
 
 </div>
 
 <script>
 
-const timezone = "Pacific/Honolulu";
+const defaultData = {
+ location:"Denver, Colorado",
+ timezone:"America/Denver",
+ status:"🟢 Bereikbaar",
+ message:"Vandaag zijn we aangekomen!",
+ polarsteps:"https://www.polarsteps.com/Serelinda/23645002-united-states?s=d2fb13cc-0457-425a-9668-d75526680ae3"
+};
 
-function updateClock() {
+let tripData =
+JSON.parse(localStorage.getItem("tripData"))
+|| defaultData;
 
-    const now = new Date();
+function render(){
 
-    const localTime =
-        now.toLocaleTimeString(
-            "nl-BE",
-            {
-                timeZone: timezone,
-                hour: "2-digit",
-                minute: "2-digit"
-            }
-        );
+ document.getElementById("location").innerText =
+ tripData.location;
 
-    document.getElementById("time").innerText =
-        localTime;
+ document.getElementById("status").innerText =
+ tripData.status;
+
+ document.getElementById("message").innerText =
+ tripData.message;
+
+ document.getElementById("polarstepsBtn").href =
+ tripData.polarsteps;
 
 }
 
+function updateClock(){
+
+ const local =
+ new Date().toLocaleTimeString(
+ "nl-BE",
+ {
+  timeZone:tripData.timezone,
+  hour:"2-digit",
+  minute:"2-digit"
+ });
+
+ const belgium =
+ new Date().toLocaleTimeString(
+ "nl-BE",
+ {
+  timeZone:"Europe/Brussels",
+  hour:"2-digit",
+  minute:"2-digit"
+ });
+
+ document.getElementById("localTime").innerText =
+ local;
+
+ document.getElementById("belgiumTime").innerText =
+ belgium;
+
+ const hour =
+ parseInt(
+ new Date().toLocaleString(
+ "en-US",
+ {
+  timeZone:tripData.timezone,
+  hour:"numeric",
+  hour12:false
+ }).split(",")[1]
+ );
+
+ document.getElementById("daynight").innerHTML =
+ (hour>=6 && hour<20)
+ ?
+ "☀️ Het is dag bij mama & papa"
+ :
+ "🌙 Mama & papa slapen waarschijnlijk";
+
+}
+
+function toggleAdmin(){
+
+ const panel =
+ document.getElementById("adminPanel");
+
+ panel.style.display =
+ panel.style.display==="block"
+ ? "none"
+ : "block";
+
+ document.getElementById("locationInput").value =
+ tripData.location;
+
+ document.getElementById("timezoneInput").value =
+ tripData.timezone;
+
+ document.getElementById("statusInput").value =
+ tripData.status;
+
+ document.getElementById("messageInput").value =
+ tripData.message;
+}
+
+function saveData(){
+
+ tripData.location =
+ document.getElementById("locationInput").value;
+
+ tripData.timezone =
+ document.getElementById("timezoneInput").value;
+
+ tripData.status =
+ document.getElementById("statusInput").value;
+
+ tripData.message =
+ document.getElementById("messageInput").value;
+
+ localStorage.setItem(
+ "tripData",
+ JSON.stringify(tripData)
+ );
+
+ render();
+
+ alert("Opgeslagen!");
+}
+
+render();
 updateClock();
+
 setInterval(updateClock,1000);
 
 </script>
