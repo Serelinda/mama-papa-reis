@@ -304,8 +304,10 @@ async function loadTripData() {
 
     try {
 
-        const response =
-            await fetch("tripdata.json");
+const response =
+    await fetch(
+        "tripdata.json?t=" + Date.now()
+    );
 
         const data =
             await response.json();
@@ -433,6 +435,14 @@ setInterval(() => {
     document.getElementById("status").innerText =
         getCurrentStatus();
 }, 1000);
+
+// Bericht en status elke 5 minuten opnieuw ophalen
+setInterval(() => {
+
+    loadTripData();
+
+}, 300000);
+``    
 
 </script>
 
