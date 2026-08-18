@@ -182,6 +182,10 @@ function getCurrentStatus() {
         )
     );
 
+if(tripData.statusMode === "CUSTOM"){
+    return tripData.customStatus;
+}
+    
     // Automatisch slapen
     if(hour >= 23 || hour < 7){
         return "😴 Nee, wij slapen nu";
