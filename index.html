@@ -398,11 +398,22 @@ else{
     document.getElementById("daynight").innerHTML =
     "☀️ Mama & papa zijn wakker";
 }
+}
 
+loadTripData().then(() => {
 
+    updateClock();
 
-loadTripData();
-updateClock();
+    setInterval(() => {
+        updateClock();
+
+        document.getElementById("status").innerText =
+        getCurrentStatus();
+
+    }, 1000);
+
+});
+    
 function hideChatButtonOnMobile() {
 
     const isMobile =
