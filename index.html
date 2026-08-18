@@ -198,7 +198,14 @@ function getCurrentStatus() {
 
     // Automatisch slapen
     if(hour >= 23 || hour < 7){
-        return "😴 Nee, wij slapen nu";
+        return "😴 Nee, wij slapen nu - je kan wél een CHAT sturen"<br><br>
+
+<a class="polarsteps"
+   href="https://chat.google.com/app/chat/AAQAQa5aWZs"
+   target="_blank"
+   style="background:#4285F4;">
+💬 Open onze gezinsCHAT
+</a>";
     }
 
     // Automatische modus
@@ -224,7 +231,7 @@ function getCurrentStatus() {
             return "⚠️ Misschien, we zijn onderweg";
 
         case "SLAPEN":
-            return "😴 Nee, wij slapen nu";
+            return "😴 Nee, wij slapen nu - je kan wél een CHAT sturen";
 
         default:
             return "✅ Ja, waarschijnlijk wel";
