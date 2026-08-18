@@ -228,6 +228,20 @@ let tripData =
 JSON.parse(localStorage.getItem("tripData"))
 || defaultData;
 
+function toggleCustomStatusField(){
+
+    const show =
+    document.getElementById("statusInput").value === "CUSTOM";
+
+    document.getElementById("customStatusInput").style.display =
+    show ? "block" : "none";
+}
+
+document
+.getElementById("statusInput")
+.addEventListener("change", toggleCustomStatusField);
+
+    
 function getCurrentStatus() {
 
     const hour = parseInt(
