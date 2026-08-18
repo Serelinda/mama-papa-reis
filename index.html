@@ -183,9 +183,13 @@ function setAutomaticLocation() {
     const day = today.getDate();
     const month = today.getMonth() + 1;
 
-    if(month !== 9){
-        return;
-    }
+if(month !== 9){
+
+tripData.location = "🏠 Thuis in België";
+tripData.timezone = "Europe/Brussels";
+
+return;
+}
 
     // Colorado
     if(day >= 2 && day <= 3){
