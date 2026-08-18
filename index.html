@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Mama & Papa op Reis</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f7fa;
+    text-align:center;
+    padding:30px;
+}
+
+.card{
+    max-width:600px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.time{
+    font-size:48px;
+    font-weight:bold;
+    color:#0066cc;
+}
+
+.location{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.status{
+    font-size:24px;
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🌍 Mama & Papa op Reis</h1>
+
+<div class="location" id="location">
+Maui, Hawaii
+</div>
+
+<div class="time" id="time">
+...
+</div>
+
+<div id="difference"></div>
+
+<div class="status">
+🌞 Wij zijn waarschijnlijk wakker
+</div>
+
+</div>
+
+<script>
+
+const timezone = "Pacific/Honolulu";
+
+function updateClock() {
+
+    const now = new Date();
+
+    const localTime =
+        now.toLocaleTimeString(
+            "nl-BE",
+            {
+                timeZone: timezone,
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+    document.getElementById("time").innerText =
+        localTime;
+
+}
+
+updateClock();
+setInterval(updateClock,1000);
+
+</script>
+
+</body>
+</html>
