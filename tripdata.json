@@ -3,3 +3,11 @@
   "customStatus": "",
   "message": "🌎 Op 02/09 vertrekken we op avontuur!"
 }
+
+/*
+{
+"statusMode": "CUSTOM",
+"customStatus": "🚗 We zitten vandaag veel in de auto.",
+"message": "Vanavond slapen we in Death Valley."
+}
+*/
