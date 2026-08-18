@@ -124,29 +124,36 @@ button{
 
 <div class="admin" id="adminPanel">
 
-<h3>Instellingen</h3>
+    <h2>Instellingen</h2>
 
-<label>Locatie</label>
-<input id="locationInput">
+    <label>Locatie</label>
+    <input id="locationInput">
 
-<label>Tijdzone</label>
-<input id="timezoneInput">
+    <label>Tijdzone</label>
+    <input id="timezoneInput">
 
-<label>Status</label>
+    <label>Bereikbaarheid</label>
 
+    <select id="statusInput">
+        <option value="AUTO">Automatisch bepalen</option>
+        <option value="BELLEN">✅ Bereikbaar</option>
+        <option value="ONDERWEG">⚠️ Onderweg</option>
+        <option value="SLAPEN">😴 Slapen</option>
+        <option value="CUSTOM">✏️ Eigen bericht</option>
+    </select>
 
+    <input
+        id="customStatusInput"
+        placeholder="Eigen boodschap"
+        style="display:none;"
+    >
 
+    <label>Bericht van vandaag</label>
+    <textarea id="messageInput" rows="4"></textarea>
 
-<input
-    id="customStatusInput"
-    placeholder="Eigen status"
-    style="display:none;"
->
-
-<label>Bericht</label>
-<textarea id="messageInput"></textarea>
-
-<button onclick="saveData()">Opslaan</button>
+    <button class="saveBtn" onclick="saveData()">
+        Opslaan
+    </button>
 
 </div>
 
