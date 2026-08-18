@@ -134,6 +134,34 @@ button{
 
 <label>Status</label>
 
+
+
+
+<input
+    id="customStatusInput"
+    placeholder="Eigen status"
+    style="display:none;"
+>
+
+<label>Bericht</label>
+<textarea id="messageInput"></textarea>
+
+<button onclick="saveData()">Opslaan</button>
+
+</div>
+
+</div>
+
+<script>
+
+const defaultData = {
+ location:"Denver, Colorado",
+ timezone:"America/Denver",
+ status:"🟢 Bereikbaar",
+ message:"Vandaag zijn we aangekomen!",
+ polarsteps:"https://www.polarsteps.com/Serelinda/23645002-united-states?s=d2fb13cc-0457-425a-9668-d75526680ae3"
+};
+
 function getCurrentStatus() {
 
     const hour = parseInt(
@@ -186,34 +214,8 @@ function getCurrentStatus() {
         default:
             return "✅ Ja, waarschijnlijk wel";
     }
-}
-`
-
-<input
-    id="customStatusInput"
-    placeholder="Eigen status"
-    style="display:none;"
->
-
-<label>Bericht</label>
-<textarea id="messageInput"></textarea>
-
-<button onclick="saveData()">Opslaan</button>
-
-</div>
-
-</div>
-
-<script>
-
-const defaultData = {
- location:"Denver, Colorado",
- timezone:"America/Denver",
- status:"🟢 Bereikbaar",
- message:"Vandaag zijn we aangekomen!",
- polarsteps:"https://www.polarsteps.com/Serelinda/23645002-united-states?s=d2fb13cc-0457-425a-9668-d75526680ae3"
-};
-
+}    
+    
 let tripData =
 JSON.parse(localStorage.getItem("tripData"))
 || defaultData;
