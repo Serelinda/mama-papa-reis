@@ -16,7 +16,8 @@ body{
 }
 
 .card{
-    max-width:700px;
+    max-width:1100px;
+    width:95%;
     margin:auto;
     background:white;
     padding:30px;
@@ -47,6 +48,27 @@ h1{
     border-radius:12px;
 }
 
+.timeRow{
+    display:flex;
+    gap:20px;
+}
+
+.timeRow .box{
+    flex:1;
+}
+
+@media (min-width: 900px){
+
+    .infoRow{
+        display:flex;
+        gap:20px;
+    }
+
+    .infoRow .box{
+        flex:1;
+    }
+} 
+    
 button{
     padding:10px 20px;
     border:none;
@@ -88,16 +110,25 @@ button{
 
 <div class="location" id="location"></div>
 
-<div class="box">
-<h3>🇺🇸 Bij mama & papa</h3>
-<div class="time" id="localTime"></div>
+
+
+    
+<div class="timeRow">
+
+    <div class="box">
+        <h3>🇺🇸 Bij mama & papa</h3>
+        <div class="time" id="localTime"></div>
+    </div>
+
+    <div class="box">
+        <h3>🇧🇪 In België</h3>
+        <div class="time" id="belgiumTime"></div>
+    </div>
+
 </div>
 
-<div class="box">
-<h3>🇧🇪 In België</h3>
-<div class="time" id="belgiumTime"></div>
-</div>
 
+    
 <div class="box" id="daynight"></div>
 
 <div class="box">
